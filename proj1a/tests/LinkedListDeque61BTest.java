@@ -106,6 +106,9 @@ public class LinkedListDeque61BTest {
         assertWithMessage("returned value is not expected")
                 .that(lld1.get(-2000))
                 .isEqualTo(null);
+        assertWithMessage("returned value is not expected")
+                .that(lld1.getRecursive(-2000))
+                .isEqualTo(null);
     }
 
     @Test
@@ -115,6 +118,7 @@ public class LinkedListDeque61BTest {
         lld1.addLast(5);
 
         assertThat(lld1.get(2000)).isEqualTo(null);
+        assertThat(lld1.getRecursive(2000)).isEqualTo(null);
     }
 
     @Test
@@ -124,8 +128,8 @@ public class LinkedListDeque61BTest {
         lld1.addFirst(15);
         lld1.addLast(5);
         lld1.addFirst(100);
-        System.out.println(lld1.size());
 
         assertThat(lld1.get(0)).isEqualTo(100);
+        assertThat(lld1.getRecursive(0)).isEqualTo(100);
     }
 }
