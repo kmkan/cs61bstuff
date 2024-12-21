@@ -1,6 +1,7 @@
 package deque;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class LinkedListDeque61B<T> implements Deque61B<T> {
 
@@ -24,27 +25,57 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
 
     @Override
     public void addFirst(T x) {
-
+        if (sentinel.next == null) {
+            Node firstNode = new Node(sentinel, x, sentinel);
+            sentinel.prev = firstNode;
+            sentinel.next = firstNode;
+        } else {
+            Node newNode = new Node(sentinel, x, sentinel.next);
+            sentinel.next.prev = newNode;
+            sentinel.next = newNode;
+        }
     }
 
     @Override
     public void addLast(T x) {
-
+        if (sentinel.next == null) {
+            Node firstNode = new Node(sentinel, x, sentinel);
+            sentinel.prev = firstNode;
+            sentinel.next = firstNode;
+        } else {
+            Node newNode = new Node(sentinel.prev, x, sentinel);
+            sentinel.prev.next = newNode;
+            sentinel.prev = newNode;
+        }
     }
 
     @Override
     public List<T> toList() {
-        return List.of();
+        List<T> returnList = new ArrayList<>();
+        Node p = sentinel.next;
+
+        while (p.item != null) {
+            returnList.add(p.item);
+            p = p.next;
+        }
+        return returnList;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return sentinel.next == null && sentinel.prev == null;
     }
 
     @Override
     public int size() {
-        return 0;
+        Node n = sentinel.next;
+        int count = 0;
+        while (n != null && n.item != null) {
+            count++;
+            n = n.next;
+        }
+
+        return count;
     }
 
     @Override
@@ -59,7 +90,19 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T get(int index) {
-        return null;
+        if (index < 0 || index >= this.size()) {
+            return null;
+        }
+
+        Node p = sentinel.next;
+        int currentPosition = index;
+
+        while (currentPosition != 0) {
+            p = p.next;
+            currentPosition--;
+        }
+
+        return p.item;
     }
 
     @Override

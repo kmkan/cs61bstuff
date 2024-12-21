@@ -59,4 +59,73 @@ public class LinkedListDeque61BTest {
      }
 
     // Below, you'll write your own tests for LinkedListDeque61B.
+    @Test
+    public void testIsEmpty() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<Integer>();
+
+        assertThat(lld1.isEmpty()).isTrue();
+    }
+
+    @Test
+    public void testIsNotEmpty() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<Integer>();
+
+        lld1.addFirst(1);
+
+        assertThat(lld1.isEmpty()).isFalse();
+    }
+
+    @Test
+    public void testSizeZero() {
+         Deque61B<String> lld1 = new LinkedListDeque61B<String>();
+
+         assertWithMessage("size is not expected")
+                 .that(lld1.size())
+                 .isEqualTo(0);
+    }
+
+    @Test
+    public void testMultipleSizes() {
+         Deque61B<Integer> lld1 = new LinkedListDeque61B<Integer>();
+
+         lld1.addFirst(1);
+         lld1.addLast(10);
+         lld1.addLast(15);
+
+         assertWithMessage("size is not expected")
+                 .that(lld1.size())
+                 .isEqualTo(3);
+    }
+
+    @Test
+    public void testNegativeIndex() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<Integer>();
+
+        lld1.addFirst(1);
+
+        assertWithMessage("returned value is not expected")
+                .that(lld1.get(-2000))
+                .isEqualTo(null);
+    }
+
+    @Test
+    public void testIndexLargerThanSize() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<Integer>();
+
+        lld1.addLast(5);
+
+        assertThat(lld1.get(2000)).isEqualTo(null);
+    }
+
+    @Test
+    public void testProperIndex() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<Integer>();
+
+        lld1.addFirst(15);
+        lld1.addLast(5);
+        lld1.addFirst(100);
+        System.out.println(lld1.size());
+
+        assertThat(lld1.get(0)).isEqualTo(100);
+    }
 }
