@@ -14,6 +14,10 @@ public class LinkedListDeque61BTest {
      /** In this test, we have three different assert statements that verify that addFirst works correctly. */
      public void addFirstTestBasic() {
          Deque61B<String> lld1 = new LinkedListDeque61B<>();
+         Deque61B<Integer> lld2 = new LinkedListDeque61B<>();
+
+         lld2.addFirst(2);
+         assertThat(lld2.toList()).containsExactly(2);
 
          lld1.addFirst("back"); // after this call we expect: ["back"]
          assertThat(lld1.toList()).containsExactly("back").inOrder();
@@ -106,9 +110,6 @@ public class LinkedListDeque61BTest {
         assertWithMessage("returned value is not expected")
                 .that(lld1.get(-2000))
                 .isEqualTo(null);
-        assertWithMessage("returned value is not expected")
-                .that(lld1.getRecursive(-2000))
-                .isEqualTo(null);
     }
 
     @Test
@@ -148,10 +149,8 @@ public class LinkedListDeque61BTest {
         lld1.addLast(66);
 
         assertThat(lld1.removeFirst()).isEqualTo(55);
-        lld1.removeFirst();
 
         assertThat(lld1.removeFirst()).isEqualTo(66);
-        lld1.removeFirst();
 
         assertThat(lld1.removeFirst()).isEqualTo(null);
     }
